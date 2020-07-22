@@ -8,15 +8,22 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
-
+	public int counter = 0;
 	private static final long serialVersionUID = -624595824849380933L;
 	// Only one thread will be used
 	private Thread thread;
 	private boolean running = false;
+	private Handler handler;
 
 	// Main logic
 	public Game() {
 		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
+		handler = new Handler();
+		// Making stack of objects in the center of the screen
+		for (int i = 0; i < 50; i++) {
+			handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player));
+		}
+
 	}
 
 	// Starter of main logic
@@ -28,10 +35,13 @@ public class Game extends Canvas implements Runnable {
 	public synchronized void start() {
 		// Starting the thread
 		thread = new Thread(this);
+
 		// Executing the run() method with new thread
 		thread.start();
 		// At the same time continuing with main thread
+
 		running = true;
+
 	}
 
 	public synchronized void stop() {
@@ -74,18 +84,27 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void tick() {
+		// Method updating an objects
 		// Handle every while opening with delta >= 1 (Pseudo time unit)
+		handler.tick();
+
 	}
 
 	private void render() {
+
+		// Method rendering a picture (background and so on)
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
 			this.createBufferStrategy(3);
 			return;
 		}
+		// First making the background
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.yellow);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		// Than making foreground
+		handler.render(g);
+		// Than displaying
 		g.dispose();
 		bs.show();
 	}
