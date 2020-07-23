@@ -7,7 +7,7 @@ public abstract class GameObject {
     // Can only be accessed in same package or in child classes
     protected int x, y;
     protected ID id;
-    
+    protected boolean status = true;
     // Speed in X and Y directions
     protected int velX, velY;
 

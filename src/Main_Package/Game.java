@@ -17,12 +17,14 @@ public class Game extends Canvas implements Runnable {
 
 	// Main logic
 	public Game() {
-		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
+		//handler need to be launched first
 		handler = new Handler();
+		this.addKeyListener(new KeyInput(handler));
+
+		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
 		// Making stack of objects in the center of the screen
-		for (int i = 0; i < 50; i++) {
-			handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player));
-		}
+
+		handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player));
 
 	}
 
