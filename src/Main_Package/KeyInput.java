@@ -14,8 +14,6 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        //System.out.println(key);
-
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tmpObject = handler.object.get(i);
             if (tmpObject.getID() == ID.Player) {
@@ -38,21 +36,21 @@ public class KeyInput extends KeyAdapter {
             }
         }
 
-        if (key == KeyEvent.VK_ESCAPE) System.exit(1);
+        if (key == KeyEvent.VK_ESCAPE)
+            System.exit(1);
     }
 
     public void keyReleased(KeyEvent e) {
-        //The key is not pressed -> set the speed to 0
+        // The key is not pressed -> set the speed to 0
         int key = e.getKeyCode();
 
-        //System.out.println(key);
+        // System.out.println(key);
 
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tmpObject = handler.object.get(i);
             if (tmpObject.getID() == ID.Player) {
 
-                // key events for player 1
-
+                // key events to do while button is not re
                 if (key == KeyEvent.VK_W || key == 38) {
                     tmpObject.setVelY(0);
                 }

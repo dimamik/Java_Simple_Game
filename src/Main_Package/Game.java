@@ -17,9 +17,10 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	private Random r;
 	private HUD hud;
+
 	// Main logic
 	public Game() {
-		//handler need to be launched first
+		// handler need to be launched first
 		handler = new Handler();
 		hud = new HUD();
 		this.addKeyListener(new KeyInput(handler));
@@ -27,12 +28,11 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
 		// Making stack of objects in the center of the screen
 
-		handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player));
+		handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player, this.handler));
 		r = new Random();
-		for (int i = 0; i < 20; i++) {
-			handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy));
+		for (int i = 0; i < 2; i++) {
+			handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
 		}
-		
 
 	}
 
@@ -53,12 +53,16 @@ public class Game extends Canvas implements Runnable {
 		running = true;
 
 	}
-	public static int clamp(int var, int min, int max){
-		if (var>=max) return var=max;
-		else if(var<=min) return var=min;
+
+	public static int clamp(int var, int min, int max) {
+		if (var >= max)
+			return var = max;
+		else if (var <= min)
+			return var = min;
 		else
-		return var;
+			return var;
 	}
+
 	public synchronized void stop() {
 		// Stopping the thread
 		try {
@@ -70,7 +74,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void run() {
-		//Not to click to activate the app
+		// Not to click to activate the app
 		this.requestFocus();
 		// Code used form StackOverFlow to handle the realtime_fps property
 		long lastTime = System.nanoTime();
@@ -120,7 +124,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		// Than making foreground
-		
+
 		handler.render(g);
 		hud.render(g);
 		// Than displaying

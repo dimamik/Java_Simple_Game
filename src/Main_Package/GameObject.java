@@ -1,6 +1,6 @@
 package Main_Package;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 //All objects
 public abstract class GameObject {
@@ -18,6 +18,9 @@ public abstract class GameObject {
     }
 
     public abstract void tick();
+    //Helps us target the 
+    //Player position without coordinating them
+    public abstract Rectangle getBounds();
 
     public abstract void render(Graphics g);
 
