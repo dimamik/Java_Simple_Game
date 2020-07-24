@@ -5,13 +5,13 @@ import java.awt.*;
 //All objects
 public abstract class GameObject {
     // Can only be accessed in same package or in child classes
-    protected int x, y;
+    protected float x, y;
     protected ID id;
     protected boolean status = true;
     // Speed in X and Y directions
-    protected int velX, velY;
+    protected float velX, velY;
 
-    public GameObject(int x, int y, ID id) {
+    public GameObject(float x, float y, ID id) {
         this.x = x;
         this.y = y;
         this.id = id;
@@ -25,19 +25,19 @@ public abstract class GameObject {
     public abstract void render(Graphics g);
 
     // Accessors and mutators
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
         return this.x;
     }
 
-    public int getY() {
+    public float getY() {
         return this.y;
     }
 
@@ -49,19 +49,19 @@ public abstract class GameObject {
         return this.id;
     }
 
-    public void setVelX(int velX) {
+    public void setVelX(float velX) {
         this.velX = velX;
     }
 
-    public void setVelY(int velY) {
+    public void setVelY(float velY) {
         this.velY = velY;
     }
 
-    public int getVelX() {
+    public float getVelX() {
         return this.velX;
     }
 
-    public int getVelY() {
+    public float getVelY() {
         return this.velY;
     }
 }

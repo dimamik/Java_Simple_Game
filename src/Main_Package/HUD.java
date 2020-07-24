@@ -12,9 +12,9 @@ public class HUD {
     private int level = 1;
 
     public void tick() {
-        HEALTH = Game.clamp(HEALTH, 0, 100);
+        HEALTH = (int) Game.clamp(HEALTH, 0, 100);
         green = 2*HEALTH;
-        green  = Game.clamp(green, 0, 255);
+        green  = (int) Game.clamp(green, 0, 255);
         score++;
 
     }

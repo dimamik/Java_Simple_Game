@@ -11,7 +11,7 @@ public class Trail extends GameObject {
     private int height, width;
     private float life;
 
-    public Trail(int x, int y, ID id, Handler handler, int width, int height, Color color, float life) {
+    public Trail(float x, float y, ID id, Handler handler, int width, int height, Color color, float life) {
         super(x, y, id);
         this.handler = handler;
         this.color = color;
@@ -45,7 +45,7 @@ public class Trail extends GameObject {
         g2d.setComposite(makeTransparent(alpha));
         //Filling the transparent blurry rectangle with color
         g.setColor(color);
-        g.fillRect(x, y, width, height);
+        g.fillRect((int) x,(int) y, width, height);
         //Setting back the default of setComposite()
         g2d.setComposite(makeTransparent(1));
 

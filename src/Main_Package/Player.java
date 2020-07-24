@@ -9,7 +9,7 @@ public class Player extends GameObject {
     Handler handler;
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
-    public Player(int x, int y, ID id, Handler handler) {
+    public Player(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
         velX = 0;
@@ -26,7 +26,7 @@ public class Player extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32, 32);
+        return new Rectangle((int) x,(int) y, 32, 32);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class Player extends GameObject {
 
         x += velX;
         y += velY;
-        x = Game.clamp(x, 0, Game.WIDTH - 36);
-        y = Game.clamp(y, 0, Game.HEIGHT - 66);
+        x = Game.clamp((int) x, 0, Game.WIDTH - 36);
+        y = Game.clamp((int) y, 0, Game.HEIGHT - 66);
 
         collision();
     }
@@ -70,7 +70,7 @@ public class Player extends GameObject {
         g2d.draw(getBounds());
         // Drawing the real Rect
         g.setColor(Color.black);
-        g.fillRect(x, y, 32, 32);
+        g.fillRect((int) x,(int) y, 32, 32);
     }
 
 }
