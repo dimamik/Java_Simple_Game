@@ -31,12 +31,16 @@ public class Game extends Canvas implements Runnable {
 		// Making stack of objects in the center of the screen
 
 		handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player, this.handler));
-		r = new Random();
-		for (int i = 0; i < 2; i++) {
+		
+		//r = new Random();
+		/* for (int i = 0; i < 2; i++) {
 			handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		}
-		handler.addObject(new SmartEnemy(r.nextInt(Game.HEIGHT-50), r.nextInt(Game.WIDTH-50), ID.SmartEnemy, handler));
+		} */
+		/* handler.addObject(new SmartEnemy(r.nextInt(Game.HEIGHT-50), r.nextInt(Game.WIDTH-50), ID.SmartEnemy, handler)); */
 
+
+		/* handler.addObject(new BossEnemy(Game.WIDTH/2,-120,
+                        ID.BossEnemy, handler)); */
 	}
 
 	// Starter of main logic

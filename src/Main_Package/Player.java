@@ -48,19 +48,41 @@ public class Player extends GameObject {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     // collision code
 
-                    HUD.HEALTH -= 5;
+                    HUD.hudAction(5);
                 }
             }
             if (tempObject.getID() == ID.FastEnemy) {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     // collision code
 
-                    HUD.HEALTH -= 10;
+                    HUD.hudAction(10);
+                }
+            }
+            if (tempObject.getID() == ID.BossEnemy) {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    // collision code
+
+                    HUD.hudAction(100);
+                }
+            }
+            if (tempObject.getID() == ID.SmartEnemy) {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    // collision code
+
+                    HUD.hudAction(50);
+                }
+            }
+            if (tempObject.getID() == ID.BossEnemyBullet) {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    // collision code
+
+                    HUD.hudAction(5);
                 }
             }
         }
     }
 
+    
     @Override
     public void render(Graphics g) {
         // Cast g to g2d

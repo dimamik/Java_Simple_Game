@@ -30,7 +30,15 @@ public class Handler {
     public void addObject(GameObject object) {
         this.object.add(object);
     }
-
+    public void ClearEnemys(){
+        for (int i = 0; i <this.object.size(); i++) {
+            GameObject tmp_Object = this.object.get(i);
+            if (tmp_Object.getID() != ID.Player){
+                this.removeObject(tmp_Object);
+                i-=1;
+            }
+        }
+    }
     public void removeObject(GameObject object) {
         this.object.remove(object);
     }
