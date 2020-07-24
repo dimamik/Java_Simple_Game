@@ -17,12 +17,14 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	private Random r;
 	private HUD hud;
+	private Spawn spawn;
 
 	// Main logic
 	public Game() {
 		// handler need to be launched first
 		handler = new Handler();
 		hud = new HUD();
+		spawn = new Spawn(handler,hud);
 		this.addKeyListener(new KeyInput(handler));
 
 		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
@@ -109,6 +111,7 @@ public class Game extends Canvas implements Runnable {
 		// Handle every while opening with delta >= 1 (Pseudo time unit)
 		handler.tick();
 		hud.tick();
+		spawn.tick();
 	}
 
 	private void render() {
