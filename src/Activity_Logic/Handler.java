@@ -1,4 +1,4 @@
-package Main_Package;
+package Activity_Logic;
 
 /* 
 Rendering and updating of objects
@@ -6,9 +6,12 @@ Rendering and updating of objects
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import Main_Package.GameObject;
+import Main_Package.ID;
+
 public class Handler {
 
-    LinkedList<GameObject> object = new LinkedList<GameObject>();
+    public LinkedList<GameObject> object = new LinkedList<GameObject>();
 
     // Updates and renders through all of the game objects
     public void tick() {

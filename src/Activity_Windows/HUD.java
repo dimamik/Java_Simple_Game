@@ -1,6 +1,8 @@
-package Main_Package;
+package Activity_Windows;
 
 import java.awt.*;
+
+import Main_Package.Game;
 
 //Health Bar
 

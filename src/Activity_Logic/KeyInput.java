@@ -1,7 +1,10 @@
-package Main_Package;
+package Activity_Logic;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import Main_Package.GameObject;
+import Main_Package.ID;
 /* 
 Fixed the switching bug by adding an array of booleans that catches the movements
 */

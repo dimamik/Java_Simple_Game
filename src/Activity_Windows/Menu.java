@@ -1,8 +1,12 @@
-package Main_Package;
+package Activity_Windows;
 
 import java.awt.event.*;
 import java.util.Random;
 
+import Activity_Logic.Handler;
+import Main_Package.Game;
+import Main_Package.ID;
+import Main_Package.Player;
 import Main_Package.Game.STATE;
 
 import java.awt.*;

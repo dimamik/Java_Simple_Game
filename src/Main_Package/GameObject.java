@@ -6,7 +6,7 @@ import java.awt.*;
 public abstract class GameObject {
     // Can only be accessed in same package or in child classes
     protected float x, y;
-    protected ID id;
+    public ID id;
     protected boolean status = true;
     // Speed in X and Y directions
     protected float velX, velY;

@@ -1,17 +1,22 @@
-package Main_Package;
+package Enemy;
 
 import java.awt.*;
 
-public class BasicEnemy extends GameObject {
+import Activity_Logic.Handler;
+import Main_Package.Game;
+import Main_Package.GameObject;
+import Main_Package.ID;
+
+public class FastEnemy extends GameObject {
 
     private Handler handler;
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
-    public BasicEnemy(int x, int y, ID id, Handler handler) {
+    public FastEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
-        velX = -2;
-        velY = 5;
+        velX = 4;
+        velY = 10;
     }
 
     @Override
@@ -30,13 +35,13 @@ public class BasicEnemy extends GameObject {
         if (x <= 0 || x >= Game.WIDTH - 32)
             velX *= -1;
         // Adding Trail every tick
-        handler.addObject(new Trail(x, y, ID.Trail, handler, 16, 16, Color.red, 0.02f));
+        handler.addObject(new Trail(x, y, ID.Trail, handler, 16, 16, Color.blue, 0.02f));
     }
 
     @Override
     public void render(Graphics g) {
 
-        g.setColor(Color.red);
+        g.setColor(Color.blue);
         g.fillRect((int) x,(int) y, 16, 16);
     }
 

@@ -1,6 +1,9 @@
-package Main_Package;
+package Activity_Windows;
 
 import java.awt.event.*;
+
+import Main_Package.Game;
+import Main_Package.Game.STATE;
 
 import java.awt.*;
 

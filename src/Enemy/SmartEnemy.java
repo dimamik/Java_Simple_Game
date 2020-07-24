@@ -1,6 +1,11 @@
-package Main_Package;
+package Enemy;
 
 import java.awt.*;
+
+import Activity_Logic.Handler;
+import Main_Package.Game;
+import Main_Package.GameObject;
+import Main_Package.ID;
 
 /* 
 Calculating the distance between Enemy and PLayer and set the VelX and VelY to this direction

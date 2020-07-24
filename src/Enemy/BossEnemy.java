@@ -1,7 +1,12 @@
-package Main_Package;
+package Enemy;
 
 import java.awt.*;
 import java.util.Random;
+
+import Activity_Logic.Handler;
+import Main_Package.Game;
+import Main_Package.GameObject;
+import Main_Package.ID;
 
 public class BossEnemy extends GameObject {
 

@@ -3,6 +3,8 @@ package Main_Package;
 import java.awt.Graphics;
 import java.util.Random;
 
+import Activity_Logic.Handler;
+import Activity_Windows.HUD;
 import Main_Package.Game.STATE;
 
 import java.awt.*;

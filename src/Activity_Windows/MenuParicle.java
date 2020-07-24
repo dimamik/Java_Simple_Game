@@ -1,7 +1,13 @@
-package Main_Package;
+package Activity_Windows;
 
 import java.awt.*;
 import java.util.Random;
+
+import Activity_Logic.Handler;
+import Enemy.Trail;
+import Main_Package.Game;
+import Main_Package.GameObject;
+import Main_Package.ID;
 
 public class MenuParicle extends GameObject {
 

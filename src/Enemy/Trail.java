@@ -1,6 +1,10 @@
-package Main_Package;
+package Enemy;
 
 import java.awt.*;
+
+import Activity_Logic.Handler;
+import Main_Package.GameObject;
+import Main_Package.ID;
 
 
 public class Trail extends GameObject {
