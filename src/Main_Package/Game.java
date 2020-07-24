@@ -18,30 +18,46 @@ public class Game extends Canvas implements Runnable {
 	private Random r;
 	private HUD hud;
 	private Spawn spawn;
+	private Menu menu;
+	private GameOver gameOver;
 
 	// Main logic
 	public Game() {
 		// handler need to be launched first
 		handler = new Handler();
 		hud = new HUD();
-		spawn = new Spawn(handler,hud);
+		spawn = new Spawn(handler, hud);
+		menu = new Menu(this, handler, hud);
+		gameOver = new GameOver();
 		this.addKeyListener(new KeyInput(handler));
-
+		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
 		// Making stack of objects in the center of the screen
+		/*
+		 * if (gameState == STATE.Game){ handler.addObject(new Player(WIDTH / 2, (int)
+		 * HEIGHT / 2, ID.Player, this.handler)); }
+		 */
 
-		handler.addObject(new Player(WIDTH / 2, (int) HEIGHT / 2, ID.Player, this.handler));
-		
-		//r = new Random();
-		/* for (int i = 0; i < 2; i++) {
-			handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		} */
-		/* handler.addObject(new SmartEnemy(r.nextInt(Game.HEIGHT-50), r.nextInt(Game.WIDTH-50), ID.SmartEnemy, handler)); */
+		// r = new Random();
+		/*
+		 * for (int i = 0; i < 2; i++) { handler.addObject(new
+		 * BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); }
+		 */
+		/*
+		 * handler.addObject(new SmartEnemy(r.nextInt(Game.HEIGHT-50),
+		 * r.nextInt(Game.WIDTH-50), ID.SmartEnemy, handler));
+		 */
 
-
-		/* handler.addObject(new BossEnemy(Game.WIDTH/2,-120,
-                        ID.BossEnemy, handler)); */
+		/*
+		 * handler.addObject(new BossEnemy(Game.WIDTH/2,-120, ID.BossEnemy, handler));
+		 */
 	}
+
+	public enum STATE {
+		Menu, Game, GameOver
+	};
+
+	public static STATE gameState = STATE.Menu;
 
 	// Starter of main logic
 	public static void main(String[] args) {
@@ -115,8 +131,12 @@ public class Game extends Canvas implements Runnable {
 		// Method updating an objects
 		// Handle every while opening with delta >= 1 (Pseudo time unit)
 		handler.tick();
-		hud.tick();
-		spawn.tick();
+		if (gameState == STATE.Game) {
+			hud.tick();
+			spawn.tick();
+		} else if (gameState == STATE.Menu) {
+			menu.tick();
+		}
 	}
 
 	private void render() {
@@ -134,8 +154,14 @@ public class Game extends Canvas implements Runnable {
 		// Than making foreground
 
 		handler.render(g);
-		hud.render(g);
-		// Than displaying
+		if (gameState == STATE.Game) {
+			hud.render(g);
+			// Than displaying
+		} else if (gameState == STATE.Menu) {
+			menu.render(g);
+		} else if (gameState == STATE.GameOver) {
+			gameOver.render(g);
+		}
 		g.dispose();
 		bs.show();
 	}

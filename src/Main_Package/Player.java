@@ -3,15 +3,19 @@ package Main_Package;
 import java.awt.Graphics;
 import java.util.Random;
 
+import Main_Package.Game.STATE;
+
 import java.awt.*;
 
 public class Player extends GameObject {
     Handler handler;
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+    Game game;
 
-    public Player(float x, float y, ID id, Handler handler) {
+    public Player(float x, float y, ID id, Handler handler, Game game) {
         super(x, y, id);
         this.handler = handler;
+        this.game = game;
         velX = 0;
         velY = 0;
     }
@@ -26,7 +30,7 @@ public class Player extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int) x,(int) y, 32, 32);
+        return new Rectangle((int) x, (int) y, 32, 32);
     }
 
     @Override
@@ -79,10 +83,13 @@ public class Player extends GameObject {
                     HUD.hudAction(5);
                 }
             }
+            if (HUD.HEALTH <= 0) {
+                handler.object.clear();
+                game.gameState = STATE.GameOver;
+            }
         }
     }
 
-    
     @Override
     public void render(Graphics g) {
         // Cast g to g2d
@@ -92,7 +99,7 @@ public class Player extends GameObject {
         g2d.draw(getBounds());
         // Drawing the real Rect
         g.setColor(Color.black);
-        g.fillRect((int) x,(int) y, 32, 32);
+        g.fillRect((int) x, (int) y, 32, 32);
     }
 
 }

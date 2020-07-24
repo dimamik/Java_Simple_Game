@@ -11,8 +11,9 @@ public class HUD {
     public static int DAMAGE = 0;
     public static int timer = 150;
     public static int timer_default=150;
-    private int score = 0;
-    private int level = 1;
+    public static int score = 0;
+    public static int level = 1;
+    public static int MAX_SCORE = 0;
     
     public void tick() {
         HEALTH = (int) Game.clamp(HEALTH, 0, 100);
@@ -45,16 +46,21 @@ public class HUD {
         HUD.DAMAGE = damage;
         HUD.timer = HUD.timer_default;
     }
+    public void restart(){
+        HEALTH = 100;
+        score(0);
+        setLevel(1);
+    }
     public void score(int score){
-        this.score=score;
+        HUD.score=score;
     }
     public int getscore(){
-        return this.score;
+        return HUD.score;
     }
     public int getLevel(){
-        return this.level;
+        return HUD.level;
     }
     public void setLevel(int level){
-        this.level=level;
+        HUD.level=level;
     }
 }
