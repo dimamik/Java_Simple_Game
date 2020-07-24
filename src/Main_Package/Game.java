@@ -15,56 +15,86 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	private Handler handler;
-	private Random r;
+	private Random r = new Random();
 	private HUD hud;
 	private Spawn spawn;
 	private Menu menu;
 	private GameOver gameOver;
+	private Help help;
+	public static STATE gameState = STATE.Menu;
 
 	public enum STATE {
-		Menu, Game, GameOver
+		Menu, Game, GameOver, Help
 	};
-
-	public static STATE gameState = STATE.Menu;
 
 	// Main logic
 	public Game() {
 		// handler need to be launched first
+		newGame();
+		Listeners();
+		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
+	}
+
+	public void Listeners() {
+		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(menu);
+		this.addMouseListener(gameOver);
+		this.addMouseListener(help);
+	}
+
+	public void newGame() {
 		handler = new Handler();
 		hud = new HUD();
 		spawn = new Spawn(handler, hud);
 		menu = new Menu(this, handler, hud);
 		gameOver = new GameOver();
-		this.addKeyListener(new KeyInput(handler));
-		this.addMouseListener(menu);
-		r = new Random();
-		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
-		if (gameState == STATE.Menu) {
-			for (int i = 0; i < 15; i++) {
-				handler.addObject(new MenuParicle(r.nextInt(Game.HEIGHT - 50), r.nextInt(Game.WIDTH - 50),
-						ID.MenuParticle, handler));
-			}
+		help = new Help();
+		new Decorations(handler);
+	}
 
+	private void tick() {
+		// Method updating an objects
+		// Handle every while opening with delta >= 1 (Pseudo time unit)
+		handler.tick();
+		if (gameState == STATE.Game) {
+			hud.tick();
+			spawn.tick();
+		} else if (gameState == STATE.Menu) {
+			menu.tick();
+		} else if (gameState == STATE.Help) {
+			help.tick();
+		} else if (gameState == STATE.GameOver) {
+			gameOver.tick();
 		}
-		// Making stack of objects in the center of the screen
-		/*
-		 * if (gameState == STATE.Game){ handler.addObject(new Player(WIDTH / 2, (int)
-		 * HEIGHT / 2, ID.Player, this.handler)); }
-		 */
+	}
 
-		// r = new Random();
-		/*
-		 * for (int i = 0; i < 2; i++) { handler.addObject(new
-		 * BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); }
-		 */
-		/*
-		 * handler.addObject(new SmartEnemy(r.nextInt(Game.HEIGHT-50),
-		 * r.nextInt(Game.WIDTH-50), ID.SmartEnemy, handler));
-		 */
+	private void render() {
 
-		/*
-		 * handler.addObject(new BossEnemy(Game.WIDTH/2,-120, ID.BossEnemy, handler));
-		 */
+		// Method rendering a picture (background and so on)
+		BufferStrategy bs = this.getBufferStrategy();
+		if (bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		// First making the background
+		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.yellow);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		// Than making foreground
+
+		handler.render(g);
+		if (gameState == STATE.Game) {
+			hud.render(g);
+		} else if (gameState == STATE.Menu) {
+			menu.render(g);
+		} else if (gameState == STATE.GameOver) {
+			gameOver.render(g);
+		} else if (gameState == STATE.Help) {
+			help.render(g);
+		}
+
+		g.dispose();
+		bs.show();
 	}
 
 	// Starter of main logic
@@ -133,45 +163,6 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 		stop();
-	}
-
-	private void tick() {
-		// Method updating an objects
-		// Handle every while opening with delta >= 1 (Pseudo time unit)
-		handler.tick();
-		if (gameState == STATE.Game) {
-			hud.tick();
-			spawn.tick();
-		} else if (gameState == STATE.Menu) {
-			menu.tick();
-		}
-	}
-
-	private void render() {
-
-		// Method rendering a picture (background and so on)
-		BufferStrategy bs = this.getBufferStrategy();
-		if (bs == null) {
-			this.createBufferStrategy(3);
-			return;
-		}
-		// First making the background
-		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.yellow);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		// Than making foreground
-
-		handler.render(g);
-		if (gameState == STATE.Game) {
-			hud.render(g);
-			// Than displaying
-		} else if (gameState == STATE.Menu) {
-			menu.render(g);
-		} else if (gameState == STATE.GameOver) {
-			gameOver.render(g);
-		}
-		g.dispose();
-		bs.show();
 	}
 
 }

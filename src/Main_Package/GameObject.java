@@ -16,7 +16,6 @@ public abstract class GameObject {
         this.y = y;
         this.id = id;
     }
-
     public abstract void tick();
     //Helps us target the 
     //Player position without coordinating them

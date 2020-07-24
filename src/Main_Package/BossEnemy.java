@@ -11,10 +11,10 @@ public class BossEnemy extends GameObject {
     private int timer2 = 50;
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
-    public BossEnemy(int x, int y, ID id, Handler handler) {
+    public BossEnemy(int x, int y, ID id, Handler handler, int timer2) {
         super(x, y, id);
         this.handler = handler;
-
+        this.timer2 = timer2;
         velX = 0;
         velY = 2;
     }

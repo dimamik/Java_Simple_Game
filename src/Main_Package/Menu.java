@@ -1,6 +1,7 @@
 package Main_Package;
 
 import java.awt.event.*;
+import java.util.Random;
 
 import Main_Package.Game.STATE;
 
@@ -9,26 +10,39 @@ import java.awt.*;
 public class Menu extends MouseAdapter {
     private Game game;
     private Handler handler;
+    private Random r = new Random();
 
     public Menu(Game game, Handler handler, HUD hud) {
         this.game = game;
         this.handler = handler;
+        for (int i = 0; i < 15; i++) {
+            handler.addObject(
+                    new MenuParicle(r.nextInt(Game.HEIGHT - 50), r.nextInt(Game.WIDTH - 50), ID.MenuParticle, handler));
+        }
     }
 
     public void mousePressed(MouseEvent e) {
-        int mx = e.getX();
-        int my = e.getY();
+        if (Game.gameState == Game.STATE.Menu) {
+            int mx = e.getX();
+            int my = e.getY();
 
-        if (mouseOver(mx, my, 230, 100, 200, 74)) {
-            Game.gameState = STATE.Game;
-            // hud.restart();
-            HUD.HEALTH = 100;
-            HUD.score = 0;
-            HUD.level = 1;
-            handler.addObject(new Player(Game.WIDTH / 2, (int) Game.HEIGHT / 2, ID.Player, this.handler, game));
-        }
-        if (mouseOver(mx, my, 230, 300, 200, 74)) {
-            System.exit(1);
+            if (mouseOver(mx, my, 230, 100, 200, 74)) {
+                Game.gameState = STATE.Game;
+                // hud.restart();
+                HUD.HEALTH = 100;
+                HUD.score = 0;
+                HUD.level = 1;
+                Decorations.clearDecorations();
+                handler.addObject(new Player(Game.WIDTH / 2, (int) Game.HEIGHT / 2, ID.Player, this.handler, game));
+
+            } else if (mouseOver(mx, my, 230, 300, 200, 74)) {
+                System.exit(1);
+            } else if (mouseOver(mx, my, 230, 300, 200, 74)) {
+                System.exit(1);
+            } else if (mouseOver(mx, my, 230, 200, 200, 74)) {
+                Game.gameState = STATE.Help;
+            }
+
         }
     }
 
