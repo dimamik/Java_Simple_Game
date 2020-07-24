@@ -16,9 +16,10 @@ public class Decorations {
                     new MenuParicle(r.nextInt(Game.HEIGHT - 50), r.nextInt(Game.WIDTH - 50), ID.MenuParticle, handler));
         }
     }
-    public static void clearDecorations(){
+
+    public static void clearDecorations() {
         for (int i = 0; i < handler.object.size(); i++) {
-            if (handler.object.get(i).id == ID.MenuParticle){
+            if (handler.object.get(i).id == ID.MenuParticle) {
                 GameObject tmpObject = handler.object.get(i);
                 handler.removeObject(tmpObject);
                 i--;
