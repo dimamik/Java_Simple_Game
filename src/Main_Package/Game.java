@@ -15,6 +15,7 @@ import Activity_Windows.HUD;
 import Activity_Windows.Help;
 import Activity_Windows.Menu;
 import Activity_Windows.Window;
+import Music.AudioPlayer;
 
 public class Game extends Canvas implements Runnable {
 
@@ -60,6 +61,8 @@ public class Game extends Canvas implements Runnable {
 		gameOver = new GameOver();
 		help = new Help();
 		Decorations decorations = new Decorations(handler);
+		AudioPlayer.load();
+		AudioPlayer.getMusic("music").loop();
 	}
 
 	private void tick() {

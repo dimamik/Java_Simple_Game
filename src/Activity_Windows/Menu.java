@@ -8,6 +8,7 @@ import Main_Package.Game;
 import Main_Package.ID;
 import Main_Package.Player;
 import Main_Package.Game.STATE;
+import Music.AudioPlayer;
 
 import java.awt.*;
 
@@ -27,10 +28,12 @@ public class Menu extends MouseAdapter {
 
     public void mousePressed(MouseEvent e) {
         if (Game.gameState == Game.STATE.Menu) {
+            
             int mx = e.getX();
             int my = e.getY();
 
             if (mouseOver(mx, my, 230, 100, 200, 74)) {
+                AudioPlayer.getSound("menu_sound").play();
                 Game.gameState = STATE.Game;
                 // hud.restart();
                 HUD.HEALTH = 100;
@@ -40,10 +43,13 @@ public class Menu extends MouseAdapter {
                 handler.addObject(new Player(Game.WIDTH / 2, (int) Game.HEIGHT / 2, ID.Player, this.handler, game));
 
             } else if (mouseOver(mx, my, 230, 300, 200, 74)) {
+            	AudioPlayer.getSound("menu_sound").play();
                 System.exit(1);
             } else if (mouseOver(mx, my, 230, 300, 200, 74)) {
+            	AudioPlayer.getSound("menu_sound").play();
                 System.exit(1);
             } else if (mouseOver(mx, my, 230, 200, 200, 74)) {
+            	AudioPlayer.getSound("menu_sound").play();
                 Game.gameState = STATE.Help;
             }
 

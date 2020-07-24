@@ -3,6 +3,7 @@ package Activity_Logic;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import Main_Package.Game;
 import Main_Package.GameObject;
 import Main_Package.ID;
 /* 
@@ -48,8 +49,10 @@ public class KeyInput extends KeyAdapter {
             }
         }
 
-        if (key == KeyEvent.VK_ESCAPE)
-            System.exit(1);
+        if (key == KeyEvent.VK_ESCAPE){
+            handler.object.clear();
+            Game.gameState = Game.STATE.Menu;
+        }
     }
 
     public void keyReleased(KeyEvent e) {
