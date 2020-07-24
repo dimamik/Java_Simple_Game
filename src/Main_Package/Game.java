@@ -21,6 +21,12 @@ public class Game extends Canvas implements Runnable {
 	private Menu menu;
 	private GameOver gameOver;
 
+	public enum STATE {
+		Menu, Game, GameOver
+	};
+
+	public static STATE gameState = STATE.Menu;
+
 	// Main logic
 	public Game() {
 		// handler need to be launched first
@@ -31,7 +37,15 @@ public class Game extends Canvas implements Runnable {
 		gameOver = new GameOver();
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(menu);
+		r = new Random();
 		new Window(WIDTH, HEIGHT, "Java Simple Game", this);
+		if (gameState == STATE.Menu) {
+			for (int i = 0; i < 15; i++) {
+				handler.addObject(new MenuParicle(r.nextInt(Game.HEIGHT - 50), r.nextInt(Game.WIDTH - 50),
+						ID.MenuParticle, handler));
+			}
+
+		}
 		// Making stack of objects in the center of the screen
 		/*
 		 * if (gameState == STATE.Game){ handler.addObject(new Player(WIDTH / 2, (int)
@@ -52,12 +66,6 @@ public class Game extends Canvas implements Runnable {
 		 * handler.addObject(new BossEnemy(Game.WIDTH/2,-120, ID.BossEnemy, handler));
 		 */
 	}
-
-	public enum STATE {
-		Menu, Game, GameOver
-	};
-
-	public static STATE gameState = STATE.Menu;
 
 	// Starter of main logic
 	public static void main(String[] args) {
@@ -149,7 +157,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		// First making the background
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.white);
+		g.setColor(Color.yellow);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		// Than making foreground
 

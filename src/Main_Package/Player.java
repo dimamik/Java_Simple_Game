@@ -85,7 +85,7 @@ public class Player extends GameObject {
             }
             if (HUD.HEALTH <= 0) {
                 handler.object.clear();
-                game.gameState = STATE.GameOver;
+                Game.gameState = STATE.GameOver;
             }
         }
     }
